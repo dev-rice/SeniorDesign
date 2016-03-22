@@ -1,5 +1,5 @@
 const int SENSOR_PIN = 2;
-const int LED_PIN = 3;
+const int LED_PIN = 4;
 const int LED_DEBUG_PIN = 13;
 const int POT_PIN = 0;
 
@@ -14,9 +14,11 @@ void setup() {
     pinMode(LED_DEBUG_PIN, OUTPUT);
     Serial.begin(9600);
 
+    pinMode(SENSOR_PIN, INPUT_PULLUP);
+
     Serial.println("Initializing Motion Sensor");
     last_detection_time = millis();
-    delay(10000);
+    //delay(10000);
 
     attachInterrupt(digitalPinToInterrupt(SENSOR_PIN), blink, FALLING);
     Serial.println("Finished initialization");
@@ -47,7 +49,7 @@ void loop() {
 }
 
 bool isReadyToDetectAgain(long last_detection_time) {
-    return (millis() - last_detection_time) > secondsToMillis(5);
+    return (millis() - last_detection_time) > secondsToMillis(0.25);
 }
 
 void blink() {
