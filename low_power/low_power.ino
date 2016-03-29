@@ -1,9 +1,14 @@
+#include <JeeLib.h> // Low power functions library
+int led_pin = 4;
+ISR(WDT_vect) { Sleepy::watchdogEvent(); } // Setup the watchdog
 void setup() {
-  // put your setup code here, to run once:
-
+ pinMode(led_pin, OUTPUT);
 }
-
 void loop() {
-  // put your main code here, to run repeatedly:
-
+ // Turn the LED on and sleep for 5 seconds
+ digitalWrite(led_pin, HIGH);
+ Sleepy::loseSomeTime(5000);
+ // Turn the LED off and sleep for 5 seconds
+ digitalWrite(led_pin, LOW);
+ Sleepy::loseSomeTime(5000);
 }

@@ -26,7 +26,7 @@ void setup() {
   last_detection_time = millis();
   
   Serial.println("Initializing Motion Sensor");
-  delay(10000);
+  delay(20000);
   attachInterrupt(digitalPinToInterrupt(sensor_pin), blink, FALLING);
 
   Serial.println("Finished initialization");
