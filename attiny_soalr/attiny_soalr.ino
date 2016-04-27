@@ -18,8 +18,6 @@ void setup() {
   // initialize the digital pin as an output.
   pinMode(led, OUTPUT);
   pinMode(detection_led, OUTPUT);
-
-  delay(20000);
   
   attachInterrupt(0, blink, FALLING);
   digitalWrite(led, LOW);
@@ -29,11 +27,10 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  if (isReadyToDetectAgain(last_detection_time)) {
-    digitalWrite(led, HIGH);
-  } else {
-    digitalWrite(led, LOW);
-  }
+  digitalWrite(led, HIGH);
+  delay(1000);
+  digitalWrite(led, LOW);
+  delay(1000);
   
   if (state) {
     state = false;
@@ -41,7 +38,7 @@ void loop() {
 }
 
 bool isReadyToDetectAgain(long last_detection_time) {
-  return (millis() - last_detection_time) > 10000;
+  return (millis() - last_detection_time) > 100;
 }
 
 void blink() {  
